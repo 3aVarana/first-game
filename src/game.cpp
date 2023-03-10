@@ -47,7 +47,19 @@ void Game::clear()
 
 void Game::render(SDL_Texture *p_tex)
 {
-    SDL_RenderCopy(renderer, p_tex, nullptr, nullptr);
+    SDL_Rect src;
+    src.x = 0;
+    src.y = 0;
+    src.w = 32;
+    src.h = 32;
+
+    SDL_Rect dst;
+    dst.x = 400;
+    dst.y = 100;
+    dst.w = 32;
+    dst.h = 32;
+
+    SDL_RenderCopy(renderer, p_tex, &src, &dst);
 }
 
 void Game::display()
