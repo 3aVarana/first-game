@@ -18,6 +18,12 @@ public:
 
     void run();
 
+    SDL_Texture *loadTexture(const char *p_filePath);
+    void cleanUp();
+    void clear();
+    void render(SDL_Texture *p_tex);
+    void display();
+
 private:
     void init(const char *title, int x, int y, int w, int h, Uint32 flags);
     void gameLoop();
