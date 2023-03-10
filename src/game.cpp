@@ -9,7 +9,10 @@ Game::Game()
     gameState = GameState::PLAY;
 }
 
-Game::~Game() {}
+Game::~Game()
+{
+    SDL_DestroyWindow(window);
+}
 
 void Game::run()
 {
@@ -35,17 +38,17 @@ void Game::gameLoop()
 
 void Game::handleEvents()
 {
-    SDL_Event event;
-    SDL_PollEvent(&event);
-
-    switch (event.type)
+    while (SDL_PollEvent(&event))
     {
-    case SDL_QUIT:
-        /* code */
-        gameState = GameState::EXIT;
-        break;
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            /* code */
+            gameState = GameState::EXIT;
+            break;
 
-    default:
-        break;
+        default:
+            break;
+        }
     }
 }

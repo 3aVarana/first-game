@@ -30,4 +30,5 @@ private:
     int screenHeight;
 
     GameState gameState;
+    SDL_Event event;
 };
