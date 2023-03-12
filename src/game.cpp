@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+#include <vector>
 
 #include <headers/game.h>
 #include <headers/Entity.h>
@@ -84,14 +85,30 @@ void Game::gameLoop()
 {
     SDL_Texture *grassTexture = loadTexture("res/gfx/ground_grass_1.png");
 
-    Entity entitiy0(100, 50, grassTexture);
+    // Entity entitiy0(100, 50, grassTexture);
+    std::vector<Entity> entities = {
+        Entity(0, 0, grassTexture),
+        Entity(30, 0, grassTexture),
+        Entity(30, 30, grassTexture),
+        Entity(30, 60, grassTexture),
+    };
+
+    {
+        Entity wilson(100, 50, grassTexture);
+        entities.push_back(wilson);
+    }
 
     while (gameState != GameState::EXIT)
     {
         handleEvents();
 
         clear();
-        render(entitiy0);
+
+        for (Entity &e : entities)
+        {
+            render(e);
+        }
+
         display();
     }
 }
