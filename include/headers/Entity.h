@@ -11,5 +11,9 @@ private:
     SDL_Texture *tex;
 
 public:
-    Entity(double x, double y, SDL_Texture *tex);
+    Entity(float p_x, float p_y, SDL_Texture *p_tex);
+    float getX();
+    float getY();
+    SDL_Texture *getTex();
+    SDL_Rect getCurrentFrame();
 };

@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <headers/game.h>
+#include <headers/Entity.h>
 
 Game::Game()
 {
@@ -45,21 +46,21 @@ void Game::clear()
     SDL_RenderClear(renderer);
 }
 
-void Game::render(SDL_Texture *p_tex)
+void Game::render(Entity &p_entity)
 {
     SDL_Rect src;
-    src.x = 0;
-    src.y = 0;
-    src.w = 32;
-    src.h = 32;
+    src.x = p_entity.getCurrentFrame().x;
+    src.y = p_entity.getCurrentFrame().y;
+    src.w = p_entity.getCurrentFrame().w;
+    src.h = p_entity.getCurrentFrame().h;
 
     SDL_Rect dst;
-    dst.x = 400;
-    dst.y = 100;
-    dst.w = 32;
-    dst.h = 32;
+    dst.x = p_entity.getX() * 4;
+    dst.y = p_entity.getY() * 4;
+    dst.w = p_entity.getCurrentFrame().w * 4;
+    dst.h = p_entity.getCurrentFrame().h * 4;
 
-    SDL_RenderCopy(renderer, p_tex, &src, &dst);
+    SDL_RenderCopy(renderer, p_entity.getTex(), &src, &dst);
 }
 
 void Game::display()
@@ -83,12 +84,14 @@ void Game::gameLoop()
 {
     SDL_Texture *grassTexture = loadTexture("res/gfx/ground_grass_1.png");
 
+    Entity entitiy0(100, 50, grassTexture);
+
     while (gameState != GameState::EXIT)
     {
         handleEvents();
 
         clear();
-        render(grassTexture);
+        render(entitiy0);
         display();
     }
 }
